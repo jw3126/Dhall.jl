@@ -2,7 +2,6 @@ using Dhall
 using Test
 using FileIO
 
-
 function load(path::AbstractString)
     # TODO delete this function after registration
     f = FileIO.File(FileIO.format"dhall", path)
@@ -16,6 +15,8 @@ end
 @testset "load" begin
     @test load(testdatapath("hello_world.dhall")) == ["hello", "world"]
     @test load(testdatapath("hello_world2.dhall")) == ["hello", "world"]
+    @test load(testdatapath("hello_world3.dhall")) == ["hello", "world"]
+    @test load(testdatapath("hello_struct.dhall")) == Dict("x"=>1, "y"=>2)
 end
 
 @testset "smoketest executables $name" for (name, path) in pairs(Dhall.PATHS)
