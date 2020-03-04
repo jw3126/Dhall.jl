@@ -27,12 +27,21 @@ function bind!(toml, item; force=false)
         end
         bind_artifact!(toml, item.name, h;
                    download_info=[(item.url, h_tar)],
-                   lazy=true,
+                   lazy=false,
                    force=true)
         @info "At path $(artifact_path(h))"
     end
     @info "Skipping existing artifact $item"
     h
+end
+
+function delete!(toml, item)
+    h = artifact_hash(item.name, toml)
+    path = artifact_path(h)
+    @info "removing $path"
+    @info "ispath(path) = $(ispath(path))"
+    rm(artifact_path(h), recursive=true, force=true)
+    @info "ispath(path) = $(ispath(path))"
 end
 
 toml = joinpath(@__DIR__, "..", "Artifacts.toml")
@@ -43,4 +52,5 @@ for item in [
              (name="dhall-yaml", url="https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-yaml-1.0.2-x86_64-linux.tar.bz2")
             ]
     bind!(toml, item)
+    delete!(toml, item)
 end
