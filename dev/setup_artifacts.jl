@@ -1,19 +1,25 @@
 using Pkg.Artifacts
 using Pkg.GitTools
 using Pkg.PlatformEngines
+using Pkg.PlatformEngines: sha256
 using Pkg
 
 Pkg.PlatformEngines.probe_platform_engines!()
 
-function bind!(toml, item)
+function bind!(toml, item; force=false)
     h = artifact_hash(item.name, toml)
+    if force && (h != nothing) && ispath(artifact_path(h))
+        rm(path, recursive=true)
+    end
     h_tar = nothing
     if h == nothing
         h = create_artifact() do artifact_dir
             @info "Creating artifact $item"
             tarball = download(item.url, joinpath(tempdir(), "$(item.name).tar.bz2"))
             try
-                h_tar = bytes2hex(GitTools.blob_hash(tarball))
+                h_tar = open(tarball) do io
+                    bytes2hex(sha256(io))
+                end
                 unpack(tarball, artifact_dir)
             finally
                 rm(tarball)
@@ -25,6 +31,7 @@ function bind!(toml, item)
                    force=true)
         @info "At path $(artifact_path(h))"
     end
+    @info "Skipping existing artifact $item"
     h
 end
 

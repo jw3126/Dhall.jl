@@ -3,7 +3,7 @@ git-tree-sha1 = "f296f1c3f770aaade98d2f1dfa960c89dee06318"
 lazy = true
 
     [[dhall.download]]
-    sha256 = "79b121880de426ef6a7ffd665e0754c5ad71871d"
+    sha256 = "6845421de9c3cc40f4140a1278c408df8ef49bf8086ee7f37730d2eda8ce9402"
     url = "https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-1.30.0-x86_64-linux.tar.bz2"
 
 [dhall-json]
@@ -11,7 +11,7 @@ git-tree-sha1 = "07ab24141dc6e00acc202049313add93edaa414f"
 lazy = true
 
     [[dhall-json.download]]
-    sha256 = "c747c3fd7ae79aac1a758e617098378b0f1bb0ba"
+    sha256 = "ea37627c4e19789af33def099d4cb145b874c03b4d5b98cb33ce06be1debf4f3"
     url = "https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-json-1.6.2-x86_64-linux.tar.bz2"
 
 [dhall-yaml]
@@ -19,5 +19,5 @@ git-tree-sha1 = "216f8d6a04d1b99612ec23f55ea3c82d64e36e84"
 lazy = true
 
     [[dhall-yaml.download]]
-    sha256 = "f112a22ac63a0c16ed2c7141e57658b8a2df1a1e"
+    sha256 = "2e45c42e572aecbfce21198e7fc8697f82ddb63786f7a5f0bd78dec35e090059"
     url = "https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-yaml-1.0.2-x86_64-linux.tar.bz2"
